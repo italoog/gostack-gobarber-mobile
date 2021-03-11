@@ -49,7 +49,7 @@ const SignIn: React.FC = () => {
           <Container>
             <Image source={logoImg} />
 
-            <Form ref={formRef} onSubmit={handleSignIn}>
+            <Form onSubmit={handleSignIn}>
               <View>
                 <Title>Faça seu logon</Title>
               </View>

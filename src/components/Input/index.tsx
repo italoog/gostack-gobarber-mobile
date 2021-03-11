@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useRef } from 'react';
 import { TextInputProps } from 'react-native';
 import { useField } from '@unform/core';
@@ -10,21 +9,15 @@ interface InputProps extends TextInputProps {
   icon: string;
 }
 
-interface InputValueReference {
-  value: string;
-}
-
 const Input: React.FC<InputProps> = ({ name, icon, ...rest }) => {
-  const { registerField, defaultValue = '', fieldName, error } = useField(name);
-  const inputValueRef = useRef<InputValueReference>({ value: defaultValue });
+  const inputRef = useRef();
+  const { registerField, defaultValue, fieldName, error } = useField(name);
 
   useEffect(() => {
     registerField({
       name: fieldName,
-      ref: inputValueRef.current,
-      path: 'value',
     });
-  }, [fieldName, registerField]);
+  }, []);
 
   return (
     <Container>
@@ -33,10 +26,6 @@ const Input: React.FC<InputProps> = ({ name, icon, ...rest }) => {
       <TextInput
         keyboardAppearance="dark"
         placeholderTextColor="#666360"
-        defaultValue={defaultValue}
-        onChangeText={(value) => {
-          inputValueRef.current.value = value;
-        }}
         {...rest}
       />
     </Container>
